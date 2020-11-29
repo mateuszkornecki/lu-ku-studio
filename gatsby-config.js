@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Lu-ko studio.`,
+    description: `Lu-ko studio portfolio.`,
+    author: `Mateusz Kornecki`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -30,15 +30,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `markdown-pages`,
-        path: `${__dirname}/src/markdown-pages`,
+        name: `markdown-projects`,
+        path: `${__dirname}/src/markdown-projects`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/markdown-pages`,
-        name: `markdown-pages`,
+        path: `${__dirname}/src/markdown-projects`,
+        name: `markdown-projects`,
       },
     },
     `gatsby-transformer-remark`,
