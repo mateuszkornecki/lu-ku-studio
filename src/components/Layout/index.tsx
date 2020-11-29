@@ -8,6 +8,7 @@ type LayoutProps = {
 const Layout = (props: LayoutProps) => {
   return (
     <div
+      className="bg-blue-50"
       style={{
         padding: "3rem",
         height: "100vh",
