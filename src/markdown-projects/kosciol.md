@@ -1,5 +1,5 @@
 ---
-slug: "/projects/second"
+slug: "/architektura/01"
 date: "2020-05-04"
 title: "Kościół na osiedlu Nowe Żerniki, 2017"
 author: "arch. Konrad Łukaszek"
