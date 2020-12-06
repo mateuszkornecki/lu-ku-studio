@@ -11,7 +11,9 @@ const NavigationItem = (props: Index) => {
 
   return (
     <Link to={redirectTo}>
-      <li>{String(children).toUpperCase()}</li>
+      <li className="m-0 text-xl duration-500 ease-in-out text-black-400 transform hover:translate-x-8">
+        / {String(children).toUpperCase()}
+      </li>
     </Link>
   )
 }
