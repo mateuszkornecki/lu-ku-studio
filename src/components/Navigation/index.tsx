@@ -8,7 +8,7 @@ type NavigationProps = {
 const Navigation = (props: NavigationProps) => {
   return (
     <nav>
-      <ul>{props.children}</ul>
+      <ul className="m-0">{props.children}</ul>
     </nav>
   )
 }
