@@ -28,16 +28,22 @@ const IndexPage = props => {
 export default IndexPage
 
 export const pageQuery = graphql`
-  query {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+  query getCovers {
+    allMarkdownRemark {
       edges {
         node {
           id
-          excerpt(pruneLength: 250)
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            slug
             title
+            slug
+            projectCover {
+              childImageSharp {
+                fluid(maxHeight: 500, quality: 100) {
+                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluidLimitPresentationSize
+                }
+              }
+            }
           }
         }
       }
