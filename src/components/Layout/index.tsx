@@ -7,7 +7,7 @@ type LayoutProps = {
 }
 
 const Layout = (props: LayoutProps) => {
-  return <div className="p-8">{props.children}</div>
+  return <div className="p-8 h-screen">{props.children}</div>
 }
 
 export default Layout
