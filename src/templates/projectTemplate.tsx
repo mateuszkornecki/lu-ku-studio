@@ -8,13 +8,9 @@ export default function Template({
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
 
-  console.log(data)
   let post = data.markdownRemark
   let projectCoverFluid = post.frontmatter.projectCover.childImageSharp.fluid
 
-  console.log("HTML", html)
-
-  console.log("img", featuredImgFluid)
   return (
     <main>
       <article style={{ display: "flex", padding: "1rem" }}>
