@@ -10,7 +10,7 @@ export default function Template({
 
   console.log(data)
   let post = data.markdownRemark
-  let featuredImgFluid = post.frontmatter.featuredImage.childImageSharp.fluid
+  let projectCoverFluid = post.frontmatter.projectCover.childImageSharp.fluid
 
   console.log("HTML", html)
 
@@ -25,7 +25,7 @@ export default function Template({
           <p>Lokalizacja: {frontmatter.location}</p>
           <p>{frontmatter.footer}</p>
         </div>
-        <img style={{ width: "500px" }} src={featuredImgFluid.src} />
+        <img style={{ width: "500px" }} src={projectCoverFluid.src} />
         {/*<Img src={featuredImgFluid} />*/}
       </article>
     </main>
@@ -43,7 +43,7 @@ export const pageQuery = graphql`
         author
         location
         footer
-        featuredImage {
+        projectCover {
           childImageSharp {
             fluid(maxWidth: 800) {
               ...GatsbyImageSharpFluid
