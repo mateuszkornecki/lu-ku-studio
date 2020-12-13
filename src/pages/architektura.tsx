@@ -29,13 +29,37 @@ const IndexPage = props => {
     },
   } = props
 
-  console.log(props)
+  const Posts = edges.map(edge => {
+    const project = edge.node.frontmatter
+    const projectCoverFluid = project.projectCover.childImageSharp.fluid
+    return (
+      <ProjectLink
+        key={edge.id}
+        path={project.slug}
+        image={projectCoverFluid}
+      />
+    )
+  })
 
-  const Posts = edges
-    .filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
-    .map(edge => <PostLink key={edge.node.id} post={edge.node} />)
-
-  return <div>{Posts}</div>
+  return (
+    <Layout>
+      <div className="flex flex-col justify-between h-full">
+        <header>
+          <Logo />
+          <Navigation>
+            <NavigationItem redirectTo="/architektura">
+              Architektura
+            </NavigationItem>
+            <NavigationItem redirectTo="/wnetrza">Wnętrza</NavigationItem>
+            <NavigationItem redirectTo="/info">Info</NavigationItem>
+          </Navigation>
+        </header>
+        <main>
+          <div className="grid grid-cols-3 gap-8">{Posts}</div>
+        </main>
+      </div>
+    </Layout>
+  )
 }
 
 export default IndexPage
