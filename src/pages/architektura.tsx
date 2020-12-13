@@ -1,13 +1,26 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Img, { FluidObject } from "gatsby-image"
+import Logo from "../components/Logo"
+import Navigation from "../components/Navigation"
+import NavigationItem from "../components/NavigationItem"
+import Layout from "../components/Layout"
 
-const PostLink = ({ post }) => (
-  <div>
-    <Link to={post.frontmatter.slug}>
-      {post.frontmatter.title} ({post.frontmatter.date})
+type ProjectLinkProps = {
+  path: string
+  image: FluidObject
+}
+
+const ProjectLink = (props: ProjectLinkProps) => {
+  const { path, image } = props
+
+  console.log(props)
+  return (
+    <Link to={path}>
+      <Img fluid={image} />
     </Link>
-  </div>
-)
+  )
+}
 
 const IndexPage = props => {
   const {
