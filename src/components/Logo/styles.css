@@ -1,0 +1,14 @@
+.logo {
+    position: relative;
+}
+
+.logo:before {
+    position: absolute;
+    content: '';
+    height: 0.35rem;
+    width: 0.35rem;
+    left: 0.55rem;
+    top: 1rem;
+    border-radius: 50%;
+    background-color: black;
+}

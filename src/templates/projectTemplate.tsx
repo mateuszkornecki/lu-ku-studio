@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
+// import Img from "gatsby-image"
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
@@ -8,13 +8,9 @@ export default function Template({
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
 
-  console.log(data)
   let post = data.markdownRemark
-  let featuredImgFluid = post.frontmatter.featuredImage.childImageSharp.fluid
+  let projectCoverFluid = post.frontmatter.projectCover.childImageSharp.fluid
 
-  console.log("HTML", html)
-
-  console.log("img", featuredImgFluid)
   return (
     <main>
       <article style={{ display: "flex", padding: "1rem" }}>
@@ -25,7 +21,7 @@ export default function Template({
           <p>Lokalizacja: {frontmatter.location}</p>
           <p>{frontmatter.footer}</p>
         </div>
-        <img style={{ width: "500px" }} src={featuredImgFluid.src} />
+        <img style={{ width: "500px" }} src={projectCoverFluid.src} />
         {/*<Img src={featuredImgFluid} />*/}
       </article>
     </main>
@@ -43,7 +39,7 @@ export const pageQuery = graphql`
         author
         location
         footer
-        featuredImage {
+        projectCover {
           childImageSharp {
             fluid(maxWidth: 800) {
               ...GatsbyImageSharpFluid
