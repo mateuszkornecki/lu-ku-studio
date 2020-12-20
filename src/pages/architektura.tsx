@@ -1,28 +1,43 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import Img, { FluidObject } from "gatsby-image"
 import Logo from "../components/Logo"
 import Navigation from "../components/Navigation"
 import NavigationItem from "../components/NavigationItem"
-import Layout from "../components/Layout"
 
 type ProjectLinkProps = {
   path: string
   image: FluidObject
+  projectName: string
 }
 
 const ProjectLink = (props: ProjectLinkProps) => {
-  const { path, image } = props
+  const { path, image, projectName } = props
+  const [isHover, setIsHover] = useState(false)
 
-  console.log(props)
   return (
-    <Link to={path}>
-      <Img fluid={image} />
+    <Link
+      to={path}
+      className=" relative"
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
+      <Img
+        fluid={{ ...image, aspectRatio: 1.75 }}
+        className="duration-500 ease-in-out hover:opacity-0"
+      />
+      <p
+        className={`${
+          isHover ? "opacity-1" : "opacity-0"
+        } absolute duration-500 ease-in-out top-4 left-4 text-xl`}
+      >
+        {projectName}
+      </p>
     </Link>
   )
 }
 
-const IndexPage = props => {
+const ArchitecturePage = props => {
   const {
     data: {
       allMarkdownRemark: { edges },
@@ -37,35 +52,36 @@ const IndexPage = props => {
         key={edge.id}
         path={project.slug}
         image={projectCoverFluid}
+        projectName={project.title.toUpperCase()}
       />
     )
   })
 
   return (
-    <Layout>
-      <div className="flex flex-col justify-between h-full">
-        <header>
-          <Logo />
-          <Navigation>
-            <NavigationItem redirectTo="/architektura">
-              Architektura
-            </NavigationItem>
-            <NavigationItem redirectTo="/wnetrza">Wnętrza</NavigationItem>
-            <NavigationItem redirectTo="/info">Info</NavigationItem>
-          </Navigation>
-        </header>
-        <main>
-          <div className="grid grid-cols-3 gap-8">{Posts}</div>
-        </main>
-      </div>
-    </Layout>
+    <div className="flex flex-col justify-between h-screen">
+      <header className="pt-8 px-8">
+        <Logo />
+        <Navigation>
+          <NavigationItem redirectTo="/architektura">
+            Architektura
+          </NavigationItem>
+          <NavigationItem redirectTo="/wnetrza">Wnętrza</NavigationItem>
+          <NavigationItem redirectTo="/info">Info</NavigationItem>
+        </Navigation>
+      </header>
+      <main className="pt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {Posts}
+        </div>
+      </main>
+    </div>
   )
 }
 
-export default IndexPage
+export default ArchitecturePage
 
 export const pageQuery = graphql`
-  query getCovers {
+  query {
     allMarkdownRemark {
       edges {
         node {
@@ -75,9 +91,8 @@ export const pageQuery = graphql`
             slug
             projectCover {
               childImageSharp {
-                fluid(maxHeight: 500, quality: 100) {
+                fluid(maxHeight: 400, quality: 100) {
                   ...GatsbyImageSharpFluid
-                  ...GatsbyImageSharpFluidLimitPresentationSize
                 }
               }
             }

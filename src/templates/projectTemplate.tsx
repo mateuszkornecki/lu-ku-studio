@@ -21,7 +21,6 @@ export default function Template({
           <p>Lokalizacja: {frontmatter.location}</p>
           <p>{frontmatter.footer}</p>
         </div>
-        <img style={{ width: "500px" }} src={projectCoverFluid.src} />
         {/*<Img src={featuredImgFluid} />*/}
       </article>
     </main>
