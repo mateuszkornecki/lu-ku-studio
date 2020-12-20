@@ -42,23 +42,23 @@ const IndexPage = props => {
   })
 
   return (
-    <Layout>
-      <div className="flex flex-col justify-between h-full">
-        <header>
-          <Logo />
-          <Navigation>
-            <NavigationItem redirectTo="/architektura">
-              Architektura
-            </NavigationItem>
-            <NavigationItem redirectTo="/wnetrza">Wnętrza</NavigationItem>
-            <NavigationItem redirectTo="/info">Info</NavigationItem>
-          </Navigation>
-        </header>
-        <main>
-          <div className="grid grid-cols-3 gap-8">{Posts}</div>
-        </main>
-      </div>
-    </Layout>
+    <div className="flex flex-col justify-between h-screen">
+      <header className="pt-8 px-8">
+        <Logo />
+        <Navigation>
+          <NavigationItem redirectTo="/architektura">
+            Architektura
+          </NavigationItem>
+          <NavigationItem redirectTo="/wnetrza">Wnętrza</NavigationItem>
+          <NavigationItem redirectTo="/info">Info</NavigationItem>
+        </Navigation>
+      </header>
+      <main className="pt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {Posts}
+        </div>
+      </main>
+    </div>
   )
 }
 
