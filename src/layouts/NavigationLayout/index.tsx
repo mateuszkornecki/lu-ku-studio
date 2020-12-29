@@ -1,21 +1,16 @@
 import React, { ReactNode, useEffect, useState } from "react"
 
-import Logo from "../Logo"
-import Navigation from "../Navigation"
-import NavigationItem from "../NavigationItem"
-
-type URLLocationType = {
-  pathname: string
-}
+import Logo from "../../components/Logo"
+import Navigation from "../../components/Navigation"
+import NavigationItem from "../../components/NavigationItem"
 
 type NavigationLayoutProps = {
   children?: ReactNode
-  location: URLLocationType
+  path?: string
 }
 
 const NavigationLayout = (props: NavigationLayoutProps) => {
-  const { children, location } = props
-  const currentPage = location.pathname
+  const { children, path } = props
 
   return (
     <div className="flex flex-col justify-between h-screen">
@@ -23,18 +18,15 @@ const NavigationLayout = (props: NavigationLayoutProps) => {
         <Logo />
         <Navigation>
           <NavigationItem
-            active={currentPage === "/architektura"}
+            active={path === "/architektura"}
             redirectTo="/architektura"
           >
             Architektura
           </NavigationItem>
-          <NavigationItem
-            active={currentPage === "/wnetrza"}
-            redirectTo="/wnetrza"
-          >
+          <NavigationItem active={path === "/wnetrza"} redirectTo="/wnetrza">
             Wnętrza
           </NavigationItem>
-          <NavigationItem active={currentPage === "/info"} redirectTo="/info">
+          <NavigationItem active={path === "/info"} redirectTo="/info">
             Info
           </NavigationItem>
         </Navigation>
