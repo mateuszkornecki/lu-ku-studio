@@ -2,19 +2,9 @@ import React from "react"
 import "./styles.css"
 import { Link } from "gatsby"
 
-type LogoProps = {
-  setActive: (active: string) => void
-}
-
-const Logo = (props: LogoProps) => {
-  const { setActive } = props
+const Logo = () => {
   return (
-    <Link
-      to={"/"}
-      onClick={() => {
-        setActive("/")
-      }}
-    >
+    <Link to={"/"}>
       <h1 className="logo m-0 mb-8 text-4xl font-bold">LU / KO STUDIO</h1>
     </Link>
   )

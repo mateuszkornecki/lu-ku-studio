@@ -4,40 +4,37 @@ import Logo from "../Logo"
 import Navigation from "../Navigation"
 import NavigationItem from "../NavigationItem"
 
+type URLLocationType = {
+  pathname: string
+}
+
 type NavigationLayoutProps = {
   children?: ReactNode
+  location: URLLocationType
 }
 
 const NavigationLayout = (props: NavigationLayoutProps) => {
-  const { children } = props
-  const [active, setActive] = useState("")
-
-  useEffect(() => console.log(active), [active])
+  const { children, location } = props
+  const currentPage = location.pathname
 
   return (
     <div className="flex flex-col justify-between h-screen">
       <header className="pt-8 px-8">
-        <Logo setActive={setActive} />
+        <Logo />
         <Navigation>
           <NavigationItem
-            active={active === "/architektura"}
-            setActive={setActive}
+            active={currentPage === "/architektura"}
             redirectTo="/architektura"
           >
             Architektura
           </NavigationItem>
           <NavigationItem
-            active={active === "/wnetrza"}
-            setActive={setActive}
+            active={currentPage === "/wnetrza"}
             redirectTo="/wnetrza"
           >
             Wnętrza
           </NavigationItem>
-          <NavigationItem
-            active={active === "/info"}
-            setActive={setActive}
-            redirectTo="/info"
-          >
+          <NavigationItem active={currentPage === "/info"} redirectTo="/info">
             Info
           </NavigationItem>
         </Navigation>
