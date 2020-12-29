@@ -17,7 +17,7 @@ const Layout = (props: LayoutProps) => {
     return <div>{children}</div>
   }
 
-  return <NavigationLayout>{children}</NavigationLayout>
+  return <NavigationLayout path={path}>{children}</NavigationLayout>
 }
 
 export default Layout

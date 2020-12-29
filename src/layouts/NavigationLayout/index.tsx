@@ -6,7 +6,7 @@ import NavigationItem from "../../components/NavigationItem"
 
 type NavigationLayoutProps = {
   children?: ReactNode
-  path?: string
+  path: string
 }
 
 const NavigationLayout = (props: NavigationLayoutProps) => {
@@ -18,15 +18,15 @@ const NavigationLayout = (props: NavigationLayoutProps) => {
         <Logo />
         <Navigation>
           <NavigationItem
-            active={path === "/architektura"}
+            active={path === "/architektura/"}
             redirectTo="/architektura"
           >
             Architektura
           </NavigationItem>
-          <NavigationItem active={path === "/wnetrza"} redirectTo="/wnetrza">
+          <NavigationItem active={path === "/wnetrza/"} redirectTo="/wnetrza">
             Wnętrza
           </NavigationItem>
-          <NavigationItem active={path === "/info"} redirectTo="/info">
+          <NavigationItem active={path === "/info/"} redirectTo="/info">
             Info
           </NavigationItem>
         </Navigation>
