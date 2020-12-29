@@ -1,8 +1,8 @@
 import React, { ReactNode, useEffect, useState } from "react"
 
 import Logo from "../../components/Logo"
-import Navigation from "../../components/Navigation"
-import NavigationItem from "../../components/NavigationItem"
+import Navigation from "./components/Navigation"
+import NavigationItem from "./components/NavigationItem"
 
 type NavigationLayoutProps = {
   children?: ReactNode
