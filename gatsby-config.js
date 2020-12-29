@@ -51,14 +51,8 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
-    {
-      resolve: `gatsby-plugin-layout`,
-      options: {
-        component: require.resolve(
-          "./src/components/NavigationLayout/index.tsx"
-        ),
-      },
-    },
+    `gatsby-plugin-layout`,
+    `gatsby-plugin-preload-fonts`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
