@@ -6,11 +6,8 @@ import Logo from "../components/Logo"
 import NavigationBack from "../components/NavigationBack"
 
 export default function Template({ data }) {
-  const { markdownRemark } = data
+  const { markdownRemark, allFile } = data
   const { frontmatter } = markdownRemark
-
-  const post = data.markdownRemark
-  const projectCoverFluid = post.frontmatter.projectCover.childImageSharp.fluid
 
   return (
     <main className="grid grid-cols-2">
@@ -37,12 +34,16 @@ export default function Template({ data }) {
           </div>
         </article>
       </section>
-      <Img fluid={projectCoverFluid} />
+      <section className="h-screen overflow-y-scroll">
+        {allFile.edges.map(edge => {
+          return <Img fluid={edge.node.childImageSharp.fluid} />
+        })}
+      </section>
     </main>
   )
 }
 export const pageQuery = graphql`
-  query($slug: String!) {
+  query($slug: String!, $imagesSlug: String!) {
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
@@ -55,6 +56,23 @@ export const pageQuery = graphql`
         projectCover {
           childImageSharp {
             fluid(maxWidth: 500) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+    allFile(
+      filter: {
+        relativeDirectory: { eq: $imagesSlug }
+        extension: { regex: "/(jpg)/" }
+      }
+    ) {
+      edges {
+        node {
+          absolutePath
+          childImageSharp {
+            fluid {
               ...GatsbyImageSharpFluid
             }
           }
