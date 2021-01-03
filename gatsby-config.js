@@ -35,13 +35,6 @@ module.exports = {
         path: `${__dirname}/src/markdown-projects`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/markdown-projects`,
-        name: `markdown-projects`,
-      },
-    },
     `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-typescript`,
