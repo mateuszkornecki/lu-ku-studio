@@ -1,22 +1,9 @@
 import React from "react"
-
-import { graphql, Link } from "gatsby"
+import Img from "gatsby-image"
+import { graphql } from "gatsby"
 
 import Logo from "../components/Logo"
-import Img from "gatsby-image"
-
-// @ts-ignore
-import arrowLeft from "../images/arrow_left.svg"
-
-function NavigationBack() {
-  return (
-    <React.Fragment>
-      <Link to="/architektura">
-        <img src={arrowLeft} />
-      </Link>
-    </React.Fragment>
-  )
-}
+import NavigationBack from "../components/NavigationBack"
 
 export default function Template({ data }) {
   const { markdownRemark } = data
@@ -30,7 +17,7 @@ export default function Template({ data }) {
       <section className="flex flex-col justify-between p-8 h-screen">
         <header>
           <Logo />
-          <NavigationBack />
+          <NavigationBack navigateTo="/architektura" />
         </header>
         <article className="flex max-w-65p text-justify	">
           <div>
