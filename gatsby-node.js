@@ -27,12 +27,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const slug = node.frontmatter.slug
+    const imagesSlug = node.frontmatter.slug.split("/")[2] + "-images"
     createPage({
       path: node.frontmatter.slug,
       component: projectTemplate,
       context: {
         // additional data can be passed via context
-        slug: node.frontmatter.slug,
+        slug,
+        imagesSlug,
       },
     })
   })
