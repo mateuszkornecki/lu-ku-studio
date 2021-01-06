@@ -6,13 +6,18 @@ type WidthType = {
 }
 
 function useWidth(): WidthType {
-  const [width, setWidth] = useState(window.innerWidth)
+  const isBrowser = typeof window !== "undefined"
+  const [width, setWidth] = useState(isBrowser ? window.innerWidth : 0)
 
   function handleResize() {
     setWidth(window.innerWidth)
   }
 
   useEffect(() => {
+    if (!isBrowser) {
+      return
+    }
+
     window.addEventListener("resize", handleResize)
 
     return function cleanUp() {
