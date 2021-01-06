@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Mateusz Kornecki <mateusz.kornecki@hey.com>",
   "dependencies": {
+    "@fontsource/roboto-condensed": "^4.1.0",
     "fontsource-roboto-condensed": "^3.0.9",
     "gatsby": "^2.26.1",
     "gatsby-image": "^2.5.0",

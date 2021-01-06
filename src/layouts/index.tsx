@@ -1,6 +1,4 @@
 import React, { ReactNode } from "react"
-import "fontsource-roboto-condensed"
-import "./layout.css"
 
 import NavigationLayout from "./NavigationLayout"
 
