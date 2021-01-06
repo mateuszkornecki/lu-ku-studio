@@ -32,7 +32,7 @@ export default function Template({ data }) {
     <section className={isMobile ? "" : `h-screen overflow-y-scroll`}>
       {allFile.edges.map(edge => {
         return (
-          <div className={isMobile ? "pb-8" : ""}>
+          <div className="pb-8">
             <Img fluid={edge.node.childImageSharp.fluid} />
           </div>
         )
@@ -47,7 +47,7 @@ export default function Template({ data }) {
           <Logo />
           <NavigationBack navigateTo="/architektura" />
         </header>
-        <article className="flex text-justify	">
+        <article className="flex text-justify	max-w-65p">
           <div>
             <h2 className="uppercase text-2xl font-bold mb-4">
               {frontmatter.title}
