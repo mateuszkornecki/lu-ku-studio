@@ -1,37 +1,90 @@
 import React from "react"
+
+import Img from "gatsby-image"
 import { graphql } from "gatsby"
-// import Img from "gatsby-image"
 
-export default function Template({
-  data, // this prop will be injected by the GraphQL query below.
-}) {
-  const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { frontmatter, html } = markdownRemark
+import Logo from "../components/Logo"
+import NavigationBack from "../components/NavigationBack"
 
-  let post = data.markdownRemark
-  let projectCoverFluid = post.frontmatter.projectCover.childImageSharp.fluid
+import useWidth from "../hooks/useWidth"
 
-  return (
-    <main>
-      <article style={{ display: "flex", padding: "1rem" }}>
-        <div style={{ flex: 1, width: "0.5vw" }}>
-          <h2>{frontmatter.title}</h2>
-          <p>{frontmatter.description}</p>
-          <p>Autor: {frontmatter.author}</p>
-          <p>Lokalizacja: {frontmatter.location}</p>
-          <p>{frontmatter.footer}</p>
-        </div>
-        {/*<Img src={featuredImgFluid} />*/}
-      </article>
+export default function Template({ data }) {
+  const { markdownRemark, allFile } = data
+  const { frontmatter } = markdownRemark
+  const { isMobile } = useWidth()
+
+  const projectDescription = (
+    <React.Fragment>
+      <p className="mb-4 text-xs">{frontmatter.description}</p>
+      <span className="flex">
+        <p className="pr-4 text-xs">Autor:</p>
+        <p className="text-xs">{frontmatter.author}</p>
+      </span>
+      <span className="flex">
+        <p className="pr-4 text-xs">Lokalizacja:</p>
+        <p className="text-xs">{frontmatter.location}</p>
+      </span>
+      <p className="text-xs">{frontmatter.footer}</p>
+    </React.Fragment>
+  )
+
+  const projectGallerySection = (
+    <section className={isMobile ? "" : `h-screen overflow-y-scroll`}>
+      {allFile.edges.map(edge => {
+        return (
+          <div className={isMobile ? "pb-8" : ""}>
+            <Img fluid={edge.node.childImageSharp.fluid} />
+          </div>
+        )
+      })}
+    </section>
+  )
+
+  const desktopLayout = (
+    <main className="grid md:grid-cols-2">
+      <section className="flex flex-col justify-between p-8 h-screen">
+        <header>
+          <Logo />
+          <NavigationBack navigateTo="/architektura" />
+        </header>
+        <article className="flex text-justify	">
+          <div>
+            <h2 className="uppercase text-2xl font-bold mb-4">
+              {frontmatter.title}
+            </h2>
+            {projectDescription}
+          </div>
+        </article>
+      </section>
+      {projectGallerySection}
     </main>
   )
+
+  const mobileLayout = (
+    <main>
+      <section className="p-8">
+        <header className="pb-8">
+          <Logo />
+          <NavigationBack navigateTo="/architektura" />
+        </header>
+        <h2 className="uppercase text-2xl font-bold">{frontmatter.title}</h2>
+      </section>
+      <section>
+        <article className="">
+          {projectGallerySection}
+          <div className="p-8 pt-0">{projectDescription}</div>
+        </article>
+      </section>
+    </main>
+  )
+
+  return isMobile ? mobileLayout : desktopLayout
 }
 export const pageQuery = graphql`
-  query($slug: String!) {
+  query($slug: String!, $imagesSlug: String!) {
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
-        #        date(formatString: "MMMM DD, YYYY")
         slug
         title
         description
@@ -40,7 +93,24 @@ export const pageQuery = graphql`
         footer
         projectCover {
           childImageSharp {
-            fluid(maxWidth: 800) {
+            fluid(maxWidth: 500) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+    allFile(
+      filter: {
+        relativeDirectory: { eq: $imagesSlug }
+        extension: { regex: "/(jpg)/" }
+      }
+    ) {
+      edges {
+        node {
+          absolutePath
+          childImageSharp {
+            fluid {
               ...GatsbyImageSharpFluid
             }
           }

@@ -1,10 +1,6 @@
 import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import Img, { FluidObject } from "gatsby-image"
-import Logo from "../components/Logo"
-import Navigation from "../components/Navigation"
-import NavigationItem from "../components/NavigationItem"
-import Layout from "../components/Layout"
 
 type ProjectLinkProps = {
   path: string
@@ -59,22 +55,8 @@ const InteriorPage = props => {
   })
 
   return (
-    <div className="flex flex-col justify-between h-screen">
-      <header className="pt-8 px-8">
-        <Logo />
-        <Navigation>
-          <NavigationItem redirectTo="/architektura">
-            Architektura
-          </NavigationItem>
-          <NavigationItem redirectTo="/wnetrza">Wnętrza</NavigationItem>
-          <NavigationItem redirectTo="/info">Info</NavigationItem>
-        </Navigation>
-      </header>
-      <main className="pt-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {Posts}
-        </div>
-      </main>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {Posts}
     </div>
   )
 }

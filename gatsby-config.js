@@ -35,13 +35,6 @@ module.exports = {
         path: `${__dirname}/src/markdown-projects`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/markdown-projects`,
-        name: `markdown-projects`,
-      },
-    },
     `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-typescript`,
@@ -51,6 +44,7 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
+    `gatsby-plugin-layout`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
