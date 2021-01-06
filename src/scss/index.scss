@@ -2,13 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "~@fontsource/roboto-condensed/scss/mixins";
-
-@include fontFace(
-        $weight: 400,
-        $display: fallback,
-        $fontDir: "~@fontsource/roboto-condensed/files"
-);
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
