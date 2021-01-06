@@ -40,7 +40,7 @@ const NavigationLayout = (props: NavigationLayoutProps) => {
           </NavigationItem>
         </Navigation>
       </header>
-      <main className="pt-8">{children}</main>
+      <main className={isInfoPage ? "" : "pt-8"}>{children}</main>
     </div>
   )
 }
