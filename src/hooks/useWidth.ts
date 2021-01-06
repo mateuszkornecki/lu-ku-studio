@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react"
 
-function useWidth() {
+type WidthType = {
+  width: number
+  isMobile: boolean
+}
+
+function useWidth(): WidthType {
   const [width, setWidth] = useState(window.innerWidth)
   useEffect(
     () => window.addEventListener("resize", () => setWidth(window.innerWidth)),
