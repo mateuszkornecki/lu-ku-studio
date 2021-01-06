@@ -1,38 +1,7 @@
-import React, { useState } from "react"
-import { Link, graphql } from "gatsby"
-import Img, { FluidObject } from "gatsby-image"
+import React from "react"
+import { graphql } from "gatsby"
 
-type ProjectLinkProps = {
-  path: string
-  image: FluidObject
-  projectName: string
-}
-
-const ProjectLink = (props: ProjectLinkProps) => {
-  const { path, image, projectName } = props
-  const [isHover, setIsHover] = useState(false)
-
-  return (
-    <Link
-      to={path}
-      className=" relative"
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
-      <Img
-        fluid={{ ...image, aspectRatio: 1.75 }}
-        className="duration-500 ease-in-out hover:opacity-0"
-      />
-      <p
-        className={`${
-          isHover ? "opacity-1" : "opacity-0"
-        } absolute duration-500 ease-in-out top-4 left-4 text-xl`}
-      >
-        {projectName}
-      </p>
-    </Link>
-  )
-}
+import ProjectCoverLink from "../components/ProjectCoverLink"
 
 const InteriorPage = props => {
   const {
@@ -45,7 +14,7 @@ const InteriorPage = props => {
     const project = edge.node.frontmatter
     const projectCoverFluid = project.projectCover.childImageSharp.fluid
     return (
-      <ProjectLink
+      <ProjectCoverLink
         key={edge.id}
         path={project.slug}
         image={projectCoverFluid}

@@ -12,8 +12,17 @@ type NavigationLayoutProps = {
 const NavigationLayout = (props: NavigationLayoutProps) => {
   const { children, path } = props
 
+  // Info page has a slightly different layout.
+  const isInfoPage = props.path === "/info/"
+
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div
+      className={
+        isInfoPage
+          ? "grid md:grid-cols-2 h-screen"
+          : "flex flex-col justify-between h-screen"
+      }
+    >
       <header className="pt-8 px-8">
         <Logo />
         <Navigation>
