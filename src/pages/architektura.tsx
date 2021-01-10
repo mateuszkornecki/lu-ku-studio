@@ -15,7 +15,7 @@ const ArchitecturePage = props => {
     const projectCoverFluid = project.projectCover.childImageSharp.fluid
     return (
       <ProjectCoverLink
-        key={edge.id}
+        key={edge.node.id}
         path={project.slug}
         image={projectCoverFluid}
         projectName={project.title.toUpperCase()}
