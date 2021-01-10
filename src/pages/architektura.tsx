@@ -34,7 +34,9 @@ export default ArchitecturePage
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark {
+    allMarkdownRemark(
+      filter: { frontmatter: { slug: { regex: "/architektura/" } } }
+    ) {
       edges {
         node {
           id

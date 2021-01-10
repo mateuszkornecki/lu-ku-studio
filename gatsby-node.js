@@ -2,10 +2,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
   const projectTemplate = require.resolve(`./src/templates/projectTemplate.tsx`)
+  const infoTemplate = require.resolve(`./src/templates/infoTemplate.tsx`)
 
-  const result = await graphql(`
+  const projects = await graphql(`
     {
       allMarkdownRemark(
+        # exclude /info
+        filter: {
+          frontmatter: { slug: { regex: "/^((?!info)[\\\\s\\\\S])*$/" } }
+        }
         sort: { order: DESC, fields: [frontmatter___date] }
         limit: 1000
       ) {
@@ -20,13 +25,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   `)
 
+  const info = await graphql(`
+    {
+      markdownRemark(frontmatter: { slug: { regex: "/info/" } }) {
+        frontmatter {
+          slug
+        }
+      }
+    }
+  `)
+
   // Handle errors
-  if (result.errors) {
+  if (projects.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
-
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  projects.data.allMarkdownRemark.edges.forEach(({ node }) => {
     const slug = node.frontmatter.slug
     const imagesSlug = node.frontmatter.slug.split("/")[2] + "-images"
     createPage({
@@ -38,5 +52,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         imagesSlug,
       },
     })
+  })
+
+  if (info.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+  const infoSlug = info.data.markdownRemark.frontmatter.slug
+  createPage({
+    path: infoSlug,
+    component: infoTemplate,
+    context: {
+      slug: infoSlug,
+    },
   })
 }
