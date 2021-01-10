@@ -13,7 +13,7 @@ const NavigationLayout = (props: NavigationLayoutProps) => {
   const { children, path } = props
 
   // Info page has a slightly different layout.
-  const isInfoPage = props.path === "/info/"
+  const isInfoPage = props.path === "/info"
 
   return (
     <div
