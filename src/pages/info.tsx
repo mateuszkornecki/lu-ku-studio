@@ -8,7 +8,7 @@ const InfoPage = props => {
 
   return (
     <main>
-      <article className="text-justify text-xs h-screen overflow-y-scroll pt-8 md:pt-0">
+      <article className="text-justify text-xs pt-8 md:pt-0">
         <Img fluid={profileImage} />
         <section className="md:max-w-65p px-8 md:px-0">
           <p className="pt-8 ">
