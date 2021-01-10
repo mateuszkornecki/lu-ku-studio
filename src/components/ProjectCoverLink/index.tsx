@@ -6,15 +6,17 @@ type ProjectCoverLink = {
   path: string
   image: FluidObject
   projectName: string
+  key: string
 }
 
 const ProjectCoverLink = (props: ProjectCoverLink) => {
-  const { path, image, projectName } = props
+  const { path, image, projectName, key } = props
   const [isHover, setIsHover] = useState(false)
 
   return (
     <Link
       to={path}
+      key={key}
       className="relative"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
