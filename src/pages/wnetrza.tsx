@@ -34,7 +34,9 @@ export default InteriorPage
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark {
+    allMarkdownRemark(
+      filter: { frontmatter: { slug: { regex: "/wnetrza/" } } }
+    ) {
       edges {
         node {
           id
