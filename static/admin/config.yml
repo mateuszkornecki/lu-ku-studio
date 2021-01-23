@@ -5,7 +5,7 @@ publish_mode: editorial_workflow
 media_folder: "static/images"
 public_folder: "/images"
 collections:
-  - name: "architecture" # Used in routes, e.g., /admin/collections/blog
+    name: "projects" # Used in routes, e.g., /admin/collections/blog
     label: "Project" # Used in the UI
     folder: "_projects" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
