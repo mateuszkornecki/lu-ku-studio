@@ -20,10 +20,11 @@ collections:
       - {label: "Okładka", name: "cover", widget: "image"}
       - {label: "Opis", name: "description", widget: "string"}
       - {label: "Body", name: "body", widget: "markdown"}
-      - label: "Zdjęcia projektu"
+      - {label: "Zdjęcia projektu"
             name: "photos"
             widget: "image"
             allow_multiple: true
             media_library:
               config:
                 multiple: true
+      }
