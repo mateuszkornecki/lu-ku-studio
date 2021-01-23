@@ -15,7 +15,7 @@ collections:
     fields: # The fields for each document, usually in front matter
       - {label: "Ścieżka", name: "projectSlug", widget: "string"}
       - {label: "Nazwa projektu", name: "projectTitle", widget: "string"}
-      - {label: "Typ projektu", name: "projectType", widget: "boolean"}
+      - {label: "Typ projektu", name: "projectType", widget: "select", options: ["architektura", "wnętrza"]}
       - {label: "Okładka", name: "projectCover", widget: "image"}
       - {label: "Zdjęcia projektu", name: "projectPhotos", widget: "image", allow_multiple: true, media_library: { config: { multiple: true }}}
       - {label: "Opis", name: "projectDescription", widget: "markdown"}
