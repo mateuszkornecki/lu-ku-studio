@@ -2,20 +2,20 @@ backend:
   name: git-gateway
   branch: master
 publish_mode: editorial_workflow
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
+media_folder: "static/images"
+public_folder: "/images"
 collections:
   - name: "architecture" # Used in routes, e.g., /admin/collections/blog
-    label: "projekt architektura" # Used in the UI
-    folder: "_posts/architecture_projects" # The path to the folder where the documents are stored
+    label: "Project" # Used in the UI
+    folder: "_projects" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     editor:
       preview: false
     fields: # The fields for each document, usually in front matter
-      - {label: "Layout", name: "layout", widget: "hidden", default: "architecture"}
       - {label: "Nazwa projektu", name: "title", widget: "string"}
-      - {label: "Okładka", name: "cover", widget: "image"}
+      - {label: "Typ projektu"}, "projectType", widget: "boolean"}
+      - {label: "Okładka", name: "projectCover", widget: "image"}
       - {label: "Zdjęcia projektu", name: "photos", widget: "image", allow_multiple: true, media_library: { config: { multiple: true }}}
       - {label: "Opis", name: "description", widget: "markdown"}
       - {label: "Autor", name: "author", widget: "string"}
