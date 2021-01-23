@@ -19,6 +19,6 @@ collections:
       - {label: "Okładka", name: "projectCover", widget: "image"}
       - {label: "Zdjęcia projektu", name: "projectPhotos", widget: "image", allow_multiple: true, media_library: { config: { multiple: true }}}
       - {label: "Opis", name: "projectDescription", widget: "markdown"}
-      - {label: "Autor", name: "projectDuthor", widget: "string"}
+      - {label: "Autor", name: "projectAuthor", widget: "string"}
       - {label: "Lokalizacja", name: "projectLocation", widget: "string"}
 
