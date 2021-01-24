@@ -42,16 +42,14 @@ export default function Template({ data }) {
 
   const desktopLayout = (
     <main className="grid md:grid-cols-2">
-      <section className="flex flex-col justify-between p-8 h-screen">
+      <section className="flex flex-col justify-between p-8 h-screen relative">
         <header>
           <Logo />
           <NavigationBack navigateTo="/architektura" />
         </header>
-        <article className="flex text-justify	max-w-65p">
+        <article className="flex text-justify	max-w-65p absolute -bottom-2/4 left-8 animate-slide-content">
           <div>
-            <h2 className="uppercase text-2xl font-bold mb-4">
-              {frontmatter.title}
-            </h2>
+            <h2 className="uppercase text-2xl mb-4">{frontmatter.title}</h2>
             {projectDescription}
           </div>
         </article>

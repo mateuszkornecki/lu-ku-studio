@@ -20,6 +20,20 @@ module.exports = {
     maxWidth: {
       "65p": "65%",
     },
+    extend: {
+      animation: {
+        "slide-content": "slideContent 1s forwards",
+        "slide-title": "slideTitle 1s forwards",
+      },
+      keyframes: {
+        slideContent: {
+          "100%": { bottom: "2rem" },
+        },
+        slideTitle: {
+          "100%": { bottom: "30%" },
+        },
+      },
+    },
   },
   variants: {},
   plugins: [],

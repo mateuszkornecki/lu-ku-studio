@@ -4,6 +4,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
+@variants hover, focus {
+  .filter-none {
+    filter: none;
+  }
+  .filter-grayscale {
+    filter: grayscale(100%);
+  }
+}
+
 body {
     font-family: 'Roboto Condensed', sans-serif;
     color: black;

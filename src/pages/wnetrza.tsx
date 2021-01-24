@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import ProjectCoverLink from "../components/ProjectCoverLink"
+import useWidth from "../hooks/useWidth"
 
 const InteriorPage = props => {
   const {
@@ -9,6 +10,8 @@ const InteriorPage = props => {
       allMarkdownRemark: { edges },
     },
   } = props
+
+  const { isMobile } = useWidth()
 
   const Posts = edges.map(edge => {
     const project = edge.node.frontmatter
@@ -24,7 +27,11 @@ const InteriorPage = props => {
   })
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <div
+      className={`grid grid-cols-1 sm:grid-cols-2 gap-8 ${
+        isMobile ? "" : "h-screen overflow-y-scroll"
+      }`}
+    >
       {Posts}
     </div>
   )
