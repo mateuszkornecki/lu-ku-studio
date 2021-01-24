@@ -15,18 +15,17 @@ const ProjectCoverLink = (props: ProjectCoverLink) => {
   return (
     <Link
       to={path}
-      className="relative"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
       <Img
-        fluid={{ ...image, aspectRatio: 1.75 }}
-        className="duration-500 ease-in-out hover:opacity-0"
+        fluid={{ ...image, aspectRatio: 1 }}
+        className="transition duration-500 ease-out filter-grayscale hover:filter-none"
       />
       <p
         className={`${
           isHover ? "opacity-1" : "opacity-0"
-        } absolute duration-500 ease-in-out top-4 left-4 text-xl`}
+        } absolute duration-500 ease-in-out left-8 bottom-8 text-2xl`}
       >
         {projectName}
       </p>
