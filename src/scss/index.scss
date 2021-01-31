@@ -22,7 +22,7 @@ body {
   // Firefox:
   scrollbar-width: thin;
   scrollbar-color: black transparent;
-  // Chrome, Edge, Opera
+  // Chrome, Edge, Safari
   &::-webkit-scrollbar {
     width: 3px !important;
   }
