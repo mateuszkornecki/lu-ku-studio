@@ -13,22 +13,24 @@ const InteriorPage = props => {
 
   const { isMobile } = useWidth()
 
-  const Posts = edges.map(edge => {
+  const Posts = edges.map((edge, index, posts) => {
     const project = edge.node.frontmatter
     const projectCoverFluid = project.projectCover.childImageSharp.fluid
+    const isLast = index === posts.length - 1
     return (
       <ProjectCoverLink
         key={edge.node.id}
         path={project.slug}
         image={projectCoverFluid}
         projectName={project.title.toUpperCase()}
+        isLast={isLast}
       />
     )
   })
 
   return (
     <div
-      className={`grid grid-cols-1 sm:grid-cols-2 gap-8 ${
+      className={`p-8 grid grid-cols-1 sm:grid-cols-2 gap-8 ${
         isMobile ? "" : "h-screen overflow-y-scroll"
       }`}
     >
