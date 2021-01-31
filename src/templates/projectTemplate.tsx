@@ -62,7 +62,7 @@ export default function Template({ data }) {
     <section className={isMobile ? "" : `h-screen overflow-y-scroll px-8 pt-8`}>
       {allFile.edges.map(edge => {
         return (
-          <div className="pb-8">
+          <div className={isMobile ? "px-8 pb-8" : "pb-8"}>
             <Img fluid={edge.node.childImageSharp.fluid} />
           </div>
         )
