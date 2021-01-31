@@ -1,6 +1,7 @@
 import Img, { FluidObject } from "gatsby-image"
 import React, { useState } from "react"
 import { Link } from "gatsby"
+import useWidth from "../../hooks/useWidth"
 
 type ProjectCoverLink = {
   path: string
@@ -10,11 +11,12 @@ type ProjectCoverLink = {
 }
 
 const ProjectCoverLink = (props: ProjectCoverLink) => {
-  const { path, image, projectName } = props
+  const { path, image, projectName, isLast } = props
   const [isHover, setIsHover] = useState(false)
+  const { isMobile } = useWidth()
 
   return (
-    <div className={props.isLast ? "pb-8" : ""}>
+    <div className={isLast && !isMobile ? "pb-8" : ""}>
       <Link
         to={path}
         onMouseEnter={() => setIsHover(true)}
