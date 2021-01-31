@@ -103,7 +103,7 @@ export default function Template({ data }) {
         <h2 className="uppercase text-2xl">{frontmatter.title}</h2>
       </section>
       <section>
-        <article className="">
+        <article className="text-justify">
           {projectGallerySection}
           <div className="p-8 pt-0">{projectDescription}</div>
         </article>
