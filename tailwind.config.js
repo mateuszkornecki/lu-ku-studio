@@ -22,15 +22,17 @@ module.exports = {
     },
     extend: {
       animation: {
-        "slide-content": "slideContent 1s forwards",
-        "slide-title": "slideTitle 1s forwards",
+        "show-content": "showContent 1000ms forwards 1000ms",
       },
       keyframes: {
-        slideContent: {
-          "100%": { bottom: "2rem" },
-        },
-        slideTitle: {
-          "100%": { bottom: "30%" },
+        showContent: {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+            visibility: "visible",
+          },
         },
       },
     },

@@ -22,10 +22,10 @@ const NavigationLayout = (props: NavigationLayoutProps) => {
           >
             Architektura
           </NavigationItem>
-          <NavigationItem active={path === "/wnetrza/"} redirectTo="/wnetrza">
+          <NavigationItem active={path === "/wnetrza"} redirectTo="/wnetrza">
             Wnętrza
           </NavigationItem>
-          <NavigationItem active={path === "/info/"} redirectTo="/info">
+          <NavigationItem active={path === "/info"} redirectTo="/info">
             Info
           </NavigationItem>
         </Navigation>

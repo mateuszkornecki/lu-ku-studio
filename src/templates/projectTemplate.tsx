@@ -1,4 +1,6 @@
-import React from "react"
+import React, { useEffect, useRef, useState } from "react"
+
+import styled, { keyframes } from "styled-components"
 
 import Img from "gatsby-image"
 import { graphql } from "gatsby"
@@ -8,10 +10,38 @@ import NavigationBack from "../components/NavigationBack"
 
 import useWidth from "../hooks/useWidth"
 
+const createTitleKeyframes = desc => keyframes`
+    100% {
+      bottom: ${desc}px;
+    }
+  `
+
+const Title = styled.div`
+  position: absolute;
+  animation: ${props => createTitleKeyframes(props.desc)} 1s forwards 250ms;
+  bottom: 2rem;
+  left: 2rem;
+`
+
 export default function Template({ data }) {
   const { markdownRemark, allFile } = data
   const { frontmatter } = markdownRemark
   const { isMobile } = useWidth()
+  const descriptionRef = useRef(null)
+  const [desc, setDesc] = useState(0)
+
+  useEffect(() => {
+    if (descriptionRef?.current?.clientHeight)
+      setDesc(descriptionRef.current.clientHeight)
+  }, [descriptionRef])
+
+  const testTitle = desc ? (
+    <Title desc={desc + 64}>
+      <h2 className="uppercase text-2xl">{frontmatter.title}</h2>
+    </Title>
+  ) : (
+    <h2 className="uppercase text-2xl">{frontmatter.title}</h2>
+  )
 
   const projectDescription = (
     <React.Fragment>
@@ -29,7 +59,7 @@ export default function Template({ data }) {
   )
 
   const projectGallerySection = (
-    <section className={isMobile ? "" : `h-screen overflow-y-scroll`}>
+    <section className={isMobile ? "" : `h-screen overflow-y-scroll px-8 pt-8`}>
       {allFile.edges.map(edge => {
         return (
           <div className="pb-8">
@@ -47,10 +77,15 @@ export default function Template({ data }) {
           <Logo />
           <NavigationBack navigateTo="/architektura" />
         </header>
-        <article className="flex text-justify	max-w-65p absolute -bottom-2/4 left-8 animate-slide-content">
+        <article className="flex text-justify max-w-65p">
           <div>
-            <h2 className="uppercase text-2xl mb-4">{frontmatter.title}</h2>
-            {projectDescription}
+            {testTitle}
+            <div
+              className="absolute max-w-65p bottom-8 left-8 invisible animate-show-content"
+              ref={descriptionRef}
+            >
+              {projectDescription}
+            </div>
           </div>
         </article>
       </section>
@@ -65,7 +100,7 @@ export default function Template({ data }) {
           <Logo />
           <NavigationBack navigateTo="/architektura" />
         </header>
-        <h2 className="uppercase text-2xl font-bold">{frontmatter.title}</h2>
+        <h2 className="uppercase text-2xl">{frontmatter.title}</h2>
       </section>
       <section>
         <article className="">

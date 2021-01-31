@@ -11,7 +11,7 @@ const InfoPage = ({ data: { allFile, markdownRemark } }) => {
   const profileImage = allFile.edges[0].node.childImageSharp.fluid
 
   return (
-    <main>
+    <main className="m-8">
       <article className="text-justify text-xs pt-8 md:pt-0 md:h-screen md:overflow-y-scroll">
         <Img fluid={profileImage} />
         <section className="md:max-w-65p px-8 md:px-0">
