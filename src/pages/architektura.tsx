@@ -3,26 +3,26 @@ import { graphql } from "gatsby"
 
 import ProjectCoverLink from "../components/ProjectCoverLink"
 import useWidth from "../hooks/useWidth"
+import getProjectSlug from "../utils/getProjectSlug"
 
 const ArchitecturePage = props => {
   const {
     data: {
-      allMarkdownRemark: { edges },
+      allDatoCmsProject: { nodes },
     },
   } = props
 
   const { isMobile } = useWidth()
 
-  const Posts = edges.map((edge, index, posts) => {
-    const project = edge.node.frontmatter
-    const projectCoverFluid = project.projectCover.childImageSharp.fluid
+  const Posts = nodes.map((node, index, posts) => {
     const isLast = index === posts.length - 1
+    const projectSlug = `/architektura/${getProjectSlug(node.slug)}/`
     return (
       <ProjectCoverLink
-        key={edge.node.id}
-        path={project.slug}
-        image={projectCoverFluid}
-        projectName={project.title.toUpperCase()}
+        key={node.id}
+        path={projectSlug}
+        image={node.cover.fluid}
+        projectName={node.name.toUpperCase()}
         isLast={isLast}
       />
     )
@@ -43,22 +43,20 @@ export default ArchitecturePage
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(
-      filter: { frontmatter: { slug: { regex: "/architektura/" } } }
-    ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            slug
-            projectCover {
-              childImageSharp {
-                fluid(maxHeight: 400, quality: 100) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
+    allDatoCmsProject {
+      nodes {
+        id
+        name
+        author
+        location
+        slug
+        cover {
+          fluid(
+            maxWidth: 400
+            forceBlurhash: false
+            imgixParams: { fm: "jpg", auto: "compress" }
+          ) {
+            ...GatsbyDatoCmsFluid
           }
         }
       }

@@ -25,7 +25,7 @@ const Title = styled.div`
 
 export default function Template({ data }) {
   const {
-    datoCmsProject: {
+    datoCmsInterior: {
       name,
       author,
       description,
@@ -127,7 +127,7 @@ export default function Template({ data }) {
 }
 export const pageQuery = graphql`
   query($projectID: String!) {
-    datoCmsProject(id: { eq: $projectID }) {
+    datoCmsInterior(id: { eq: $projectID }) {
       id
       name
       author

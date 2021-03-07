@@ -2,33 +2,29 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
   const projectTemplate = require.resolve(`./src/templates/projectTemplate.tsx`)
+  const interiorTemplate = require.resolve(
+    `./src/templates/interiorTemplate.tsx`
+  )
   const infoTemplate = require.resolve(`./src/templates/infoTemplate.tsx`)
 
   const projects = await graphql(`
     {
-      allMarkdownRemark(
-        # exclude /info
-        filter: {
-          frontmatter: { slug: { regex: "/^((?!info)[\\\\s\\\\S])*$/" } }
-        }
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
-        edges {
-          node {
-            frontmatter {
-              slug
-            }
-          }
+      allDatoCmsProject {
+        nodes {
+          id
+          name
+          slug
         }
       }
     }
   `)
 
-  const info = await graphql(`
+  const interiors = await graphql(`
     {
-      markdownRemark(frontmatter: { slug: { regex: "/info/" } }) {
-        frontmatter {
+      allDatoCmsInterior {
+        nodes {
+          id
+          name
           slug
         }
       }
@@ -37,28 +33,41 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // Handle errors
   if (projects.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    reporter.panicOnBuild(`Projects - Error while running GraphQL query.`)
     return
   }
-  projects.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const slug = node.frontmatter.slug
-    const imagesSlug = node.frontmatter.slug.split("/")[2] + "-images"
+  projects.data.allDatoCmsProject.nodes.forEach(({ name, id, slug }) => {
+    const projectSlug =
+      `/architektura/` + slug.toLowerCase().split(" ").join("_")
     createPage({
-      path: node.frontmatter.slug,
+      path: projectSlug,
       component: projectTemplate,
       context: {
         // additional data can be passed via context
-        slug,
-        imagesSlug,
+        projectSlug,
+        projectID: id,
       },
     })
   })
 
-  if (info.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
+  if (interiors.errors) {
+    reporter.panicOnBuild(`Interiors - Error while running GraphQL query.`)
     return
   }
-  const infoSlug = info.data.markdownRemark.frontmatter.slug
+  interiors.data.allDatoCmsInterior.nodes.forEach(({ name, id, slug }) => {
+    const projectSlug = `/wnetrza/` + slug.toLowerCase().split(" ").join("_")
+    createPage({
+      path: projectSlug,
+      component: interiorTemplate,
+      context: {
+        // additional data can be passed via context
+        projectSlug,
+        projectID: id,
+      },
+    })
+  })
+
+  const infoSlug = "/info/"
   createPage({
     path: infoSlug,
     component: infoTemplate,
