@@ -4,14 +4,13 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import useWidth from "../hooks/useWidth"
 
-const InfoPage = ({ data: { allFile, markdownRemark } }) => {
+const InfoPage = ({ data }) => {
   const {
-    frontmatter: { description, telephone, email },
-  } = markdownRemark
+    datoCmsInfo: { description, photo, phone, email },
+  } = data
 
   const { isMobile } = useWidth()
-
-  const profileImage = allFile.edges[0].node.childImageSharp.fluid
+  const profileImage = photo.fluid
 
   return (
     <main>
@@ -22,7 +21,7 @@ const InfoPage = ({ data: { allFile, markdownRemark } }) => {
             {description}
           </p>
           <p className="mt-4">Kontakt E: {email} </p>
-          <p className={isMobile ? "pb-8" : ""}>T: {telephone}</p>
+          <p className={isMobile ? "pb-8" : ""}>T: {phone}</p>
         </section>
       </article>
     </main>
@@ -32,27 +31,18 @@ const InfoPage = ({ data: { allFile, markdownRemark } }) => {
 export default InfoPage
 
 export const pageQuery = graphql`
-  query($slug: String!) {
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-      html
-      frontmatter {
-        slug
-        description
-        telephone
-        email
-      }
-    }
-    allFile(
-      filter: { extension: { regex: "/(jpg)/" }, name: { eq: "profile" } }
-    ) {
-      edges {
-        node {
-          absolutePath
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
-            }
-          }
+  query {
+    datoCmsInfo {
+      description
+      email
+      phone
+      photo {
+        fluid(
+          maxWidth: 400
+          forceBlurhash: false
+          imgixParams: { fm: "jpg", auto: "compress" }
+        ) {
+          ...GatsbyDatoCmsFluid
         }
       }
     }
