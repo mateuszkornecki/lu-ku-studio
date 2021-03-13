@@ -9,6 +9,7 @@ import Logo from "../components/Logo"
 import NavigationBack from "../components/NavigationBack"
 
 import useWidth from "../hooks/useWidth"
+import getParagraphsFromDescription from "../utils/getParagraphsFromDescription"
 
 const createTitleKeyframes = desc => keyframes`
   100% {
@@ -25,14 +26,7 @@ const Title = styled.div`
 
 export default function Template({ data }) {
   const {
-    datoCmsInterior: {
-      name,
-      author,
-      description,
-      photos,
-      additionalInfo,
-      location,
-    },
+    datoCmsInterior: { name, description, photos },
   } = data
 
   const { isMobile } = useWidth()
@@ -46,26 +40,13 @@ export default function Template({ data }) {
 
   const testTitle = desc ? (
     <Title desc={desc + 64}>
-      <h2 className="uppercase text-2xl">{name}</h2>
+      <h2 className="uppercase text-2xl max-w-65p">{name}</h2>
     </Title>
   ) : (
-    <h2 className="uppercase text-2xl">{name}</h2>
+    <h2 className="uppercase text-2xl max-w-65p">{name}</h2>
   )
 
-  const projectDescription = (
-    <React.Fragment>
-      <p className="mb-4 text-xs">{description}</p>
-      <span className="flex">
-        <p className="pr-4 text-xs">Autor:</p>
-        <p className="text-xs">{author}</p>
-      </span>
-      <span className="flex">
-        <p className="pr-4 text-xs">Lokalizacja:</p>
-        <p className="text-xs">{location}</p>
-      </span>
-      <p className="text-xs">{additionalInfo}</p>
-    </React.Fragment>
-  )
+  const projectDescription = getParagraphsFromDescription(description)
 
   const projectGallerySection = (
     <section className={isMobile ? "" : `h-screen overflow-y-scroll px-8 pt-8`}>
@@ -89,14 +70,14 @@ export default function Template({ data }) {
           <Logo />
           <NavigationBack navigateTo="/architektura" />
         </header>
-        <article className="flex text-justify max-w-65p">
+        <article className="flex max-w-65p">
           <div>
             {testTitle}
             <div
               className="absolute max-w-65p bottom-8 left-8 invisible animate-show-content"
               ref={descriptionRef}
             >
-              {projectDescription}
+              <p className="text-xs text-justify">{projectDescription}</p>
             </div>
           </div>
         </article>
@@ -117,7 +98,9 @@ export default function Template({ data }) {
       <section>
         <article className="text-justify">
           {projectGallerySection}
-          <div className="p-8 pt-0">{projectDescription}</div>
+          <div className="p-8 pt-0">
+            <p className="text-xs">{projectDescription}</p>
+          </div>
         </article>
       </section>
     </main>
@@ -130,15 +113,12 @@ export const pageQuery = graphql`
     datoCmsInterior(id: { eq: $projectID }) {
       id
       name
-      author
-      location
-      additionalInfo
       description
       cover {
         fluid(
           maxWidth: 400
           forceBlurhash: false
-          imgixParams: { fm: "jpg", auto: "compress" }
+          imgixParams: { fm: "jpg", q: 100 }
         ) {
           ...GatsbyDatoCmsFluid
         }
@@ -148,7 +128,7 @@ export const pageQuery = graphql`
         fluid(
           maxWidth: 400
           forceBlurhash: false
-          imgixParams: { fm: "jpg", auto: "compress" }
+          imgixParams: { fm: "jpg", q: 100 }
         ) {
           ...GatsbyDatoCmsFluid
         }
