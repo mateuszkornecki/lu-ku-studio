@@ -3,14 +3,16 @@ import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import useWidth from "../hooks/useWidth"
+import getParagraphsFromDescription from "../utils/getParagraphsFromDescription"
 
 const InfoPage = ({ data }) => {
   const {
-    datoCmsInfo: { description, photo, phone, email },
+    datoCmsInfo: { description, photo },
   } = data
 
   const { isMobile } = useWidth()
   const profileImage = photo.fluid
+  const infoDescription = getParagraphsFromDescription(description)
 
   return (
     <main>
@@ -18,10 +20,8 @@ const InfoPage = ({ data }) => {
         <Img className={isMobile ? "mx-8" : "mt-8"} fluid={profileImage} />
         <section className="px-8 md:px-0 2xl:max-w-65p">
           <p className="pt-8" style={{ flexGrow: 1, flexBasis: "" }}>
-            {description}
+            {infoDescription}
           </p>
-          <p className="mt-4">Kontakt E: {email} </p>
-          <p className={isMobile ? "pb-8" : ""}>T: {phone}</p>
         </section>
       </article>
     </main>
@@ -34,13 +34,11 @@ export const pageQuery = graphql`
   query {
     datoCmsInfo {
       description
-      email
-      phone
       photo {
         fluid(
           maxWidth: 400
           forceBlurhash: false
-          imgixParams: { fm: "jpg", auto: "compress" }
+          imgixParams: { fm: "jpg", q: 100 }
         ) {
           ...GatsbyDatoCmsFluid
         }
