@@ -43,7 +43,7 @@ export default ArchitecturePage
 
 export const pageQuery = graphql`
   query {
-    allDatoCmsProject {
+    allDatoCmsProject(sort: { order: ASC, fields: [position] }) {
       nodes {
         id
         slug
