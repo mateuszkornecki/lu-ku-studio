@@ -5,24 +5,24 @@ import ProjectPage from "../components/ProjectPage"
 
 export default function Template({ data }) {
   const {
-    datoCmsInterior: { name, description, photos },
+    datoCmsProject: { name, description, photos },
   } = data
 
-  const INTERIOR_PAGE_PATH = "/wnetrza"
+  const EXTERIOR_PAGE_PATH = "/architektura"
 
   return (
     <ProjectPage
       name={name}
       description={description}
       photos={photos}
-      path={INTERIOR_PAGE_PATH}
+      path={EXTERIOR_PAGE_PATH}
     />
   )
 }
 
 export const pageQuery = graphql`
   query($projectID: String!) {
-    datoCmsInterior(id: { eq: $projectID }) {
+    datoCmsProject(id: { eq: $projectID }) {
       id
       name
       description

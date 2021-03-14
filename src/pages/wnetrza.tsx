@@ -47,8 +47,6 @@ export const pageQuery = graphql`
       nodes {
         id
         name
-        author
-        location
         slug
         cover {
           fluid(
