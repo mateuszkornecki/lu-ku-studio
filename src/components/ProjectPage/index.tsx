@@ -1,15 +1,11 @@
 import React, { useEffect, useRef, useState } from "react"
-
 import styled, { keyframes } from "styled-components"
-
 import Img from "gatsby-image"
-import { graphql } from "gatsby"
 
-import Logo from "../components/Logo"
-import NavigationBack from "../components/NavigationBack"
-
-import useWidth from "../hooks/useWidth"
-import getParagraphsFromDescription from "../utils/getParagraphsFromDescription"
+import Logo from "../Logo"
+import NavigationBack from "../NavigationBack"
+import useWidth from "../../hooks/useWidth"
+import getParagraphsFromDescription from "../../utils/getParagraphsFromDescription"
 
 const createTitleKeyframes = desc => keyframes`
   100% {
@@ -24,10 +20,15 @@ const Title = styled.div`
   left: 2rem;
 `
 
-export default function Template({ data }) {
-  const {
-    datoCmsProject: { name, description, photos },
-  } = data
+type ProjectPageProps = {
+  name: string
+  description: string
+  path: string
+  photos: any[]
+}
+
+function ProjectPage(props: ProjectPageProps) {
+  const { name, description, photos, path } = props
 
   const { isMobile } = useWidth()
   const descriptionRef = useRef(null)
@@ -68,7 +69,7 @@ export default function Template({ data }) {
       <section className="flex flex-col justify-between p-8 h-screen relative">
         <header>
           <Logo />
-          <NavigationBack navigateTo="/architektura" />
+          <NavigationBack navigateTo={path} />
         </header>
         <article className="flex max-w-65p">
           <div>
@@ -108,31 +109,5 @@ export default function Template({ data }) {
 
   return isMobile ? mobileLayout : desktopLayout
 }
-export const pageQuery = graphql`
-  query($projectID: String!) {
-    datoCmsProject(id: { eq: $projectID }) {
-      id
-      name
-      description
-      cover {
-        fluid(
-          maxWidth: 400
-          forceBlurhash: false
-          imgixParams: { fm: "jpg", q: 100 }
-        ) {
-          ...GatsbyDatoCmsFluid
-        }
-      }
-      photos {
-        originalId
-        fluid(
-          maxWidth: 400
-          forceBlurhash: false
-          imgixParams: { fm: "jpg", q: 100 }
-        ) {
-          ...GatsbyDatoCmsFluid
-        }
-      }
-    }
-  }
-`
+
+export default ProjectPage

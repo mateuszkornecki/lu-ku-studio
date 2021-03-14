@@ -1,7 +1,9 @@
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const projectTemplate = require.resolve(`./src/templates/projectTemplate.tsx`)
+  const exteriorTemplate = require.resolve(
+    `./src/templates/exteriorTemplate.tsx`
+  )
   const interiorTemplate = require.resolve(
     `./src/templates/interiorTemplate.tsx`
   )
@@ -41,7 +43,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       `/architektura/` + slug.toLowerCase().split(" ").join("_")
     createPage({
       path: projectSlug,
-      component: projectTemplate,
+      component: exteriorTemplate,
       context: {
         // additional data can be passed via context
         projectSlug,

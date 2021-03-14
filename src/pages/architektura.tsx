@@ -46,10 +46,8 @@ export const pageQuery = graphql`
     allDatoCmsProject {
       nodes {
         id
-        name
-        author
-        location
         slug
+        name
         cover {
           fluid(
             maxWidth: 400
