@@ -43,7 +43,7 @@ export default InteriorPage
 
 export const pageQuery = graphql`
   query {
-    allDatoCmsInterior {
+    allDatoCmsInterior(sort: { order: ASC, fields: [position] }) {
       nodes {
         id
         name
