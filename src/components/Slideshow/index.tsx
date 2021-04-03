@@ -1,4 +1,5 @@
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useEffect, useMemo, useState } from "react"
+import shuffleArray from "../../utils/shuffleArray"
 
 type SlideshowProps = {
   children: ReactElement[]
@@ -8,6 +9,13 @@ type SlideshowProps = {
 const Slideshow = (props: SlideshowProps) => {
   const { children, duration } = props
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+
+  const childrenIndexes = children.map((element, index) => index)
+  const randomizedChildrenIndexes = useMemo(
+    () => shuffleArray(childrenIndexes),
+    [children.length]
+  )
+  const indexToDisplay = randomizedChildrenIndexes[currentSlideIndex]
 
   const DEFAULT_DURATION = 5000
 
@@ -21,7 +29,7 @@ const Slideshow = (props: SlideshowProps) => {
     })
   }
 
-  function changeSlide() {
+  function slideTransition() {
     const interval = setInterval(nextSlide, duration || DEFAULT_DURATION)
 
     return function cleanUp() {
@@ -29,9 +37,9 @@ const Slideshow = (props: SlideshowProps) => {
     }
   }
 
-  useEffect(changeSlide, [])
+  useEffect(slideTransition, [])
 
-  return children[currentSlideIndex]
+  return children[indexToDisplay]
 }
 
 export default Slideshow
