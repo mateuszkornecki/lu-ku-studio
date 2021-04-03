@@ -30,7 +30,7 @@ const ArchitecturePage = props => {
 
   return (
     <div
-      className={`p-8 grid grid-cols-1 sm:grid-cols-2 gap-8 ${
+      className={`p-8 grid auto-rows-min grid-cols-1 sm:grid-cols-2 gap-8 ${
         isMobile ? "" : "h-screen overflow-y-scroll"
       }`}
     >
