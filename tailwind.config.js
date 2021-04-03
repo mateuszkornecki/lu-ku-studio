@@ -23,6 +23,7 @@ module.exports = {
     extend: {
       animation: {
         "show-content": "showContent 1000ms forwards 1000ms",
+        "slide-show": "slide 10s linear",
       },
       keyframes: {
         showContent: {
@@ -32,6 +33,20 @@ module.exports = {
           "100%": {
             opacity: 1,
             visibility: "visible",
+          },
+        },
+        slide: {
+          "0%": {
+            opacity: 0,
+          },
+          "20%": {
+            opacity: 1,
+          },
+          "80%": {
+            opacity: 1,
+          },
+          "100%": {
+            opacity: 0,
           },
         },
       },
