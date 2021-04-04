@@ -33,7 +33,11 @@ export const pageQuery = graphql`
       }
       photos {
         originalId
-        fluid(forceBlurhash: false, imgixParams: { fm: "jpg", q: 100 }) {
+        fluid(
+          maxWidth: 3080
+          forceBlurhash: false
+          imgixParams: { fm: "jpg", q: 100 }
+        ) {
           ...GatsbyDatoCmsFluid
         }
       }

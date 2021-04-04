@@ -35,7 +35,11 @@ export const pageQuery = graphql`
     datoCmsInfo {
       description
       photo {
-        fluid(forceBlurhash: false, imgixParams: { fm: "jpg", q: 100 }) {
+        fluid(
+          maxWidth: 3080
+          forceBlurhash: false
+          imgixParams: { fm: "jpg", q: 100 }
+        ) {
           ...GatsbyDatoCmsFluid
         }
       }

@@ -49,10 +49,7 @@ export const pageQuery = graphql`
         name
         slug
         cover {
-          fluid(
-            forceBlurhash: false
-            imgixParams: { fm: "jpg", auto: "compress" }
-          ) {
+          fluid(forceBlurhash: false, imgixParams: { fm: "jpg", q: 100 }) {
             ...GatsbyDatoCmsFluid
           }
         }
