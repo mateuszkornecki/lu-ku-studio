@@ -50,7 +50,6 @@ export const pageQuery = graphql`
         name
         cover {
           fluid(
-            maxWidth: 400
             forceBlurhash: false
             imgixParams: { fm: "jpg", auto: "compress" }
           ) {

@@ -29,11 +29,7 @@ export const pageQuery = graphql`
   query {
     datoCmsLandingPage {
       slideshowPhotos {
-        fluid(
-          maxWidth: 400
-          forceBlurhash: false
-          imgixParams: { fm: "jpg", q: 100 }
-        ) {
+        fluid(forceBlurhash: false, imgixParams: { fm: "jpg", q: 100 }) {
           ...GatsbyDatoCmsFluid
         }
       }

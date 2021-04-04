@@ -27,21 +27,13 @@ export const pageQuery = graphql`
       name
       description
       cover {
-        fluid(
-          maxWidth: 400
-          forceBlurhash: false
-          imgixParams: { fm: "jpg", q: 100 }
-        ) {
+        fluid(forceBlurhash: false, imgixParams: { fm: "jpg", q: 100 }) {
           ...GatsbyDatoCmsFluid
         }
       }
       photos {
         originalId
-        fluid(
-          maxWidth: 400
-          forceBlurhash: false
-          imgixParams: { fm: "jpg", q: 100 }
-        ) {
+        fluid(forceBlurhash: false, imgixParams: { fm: "jpg", q: 100 }) {
           ...GatsbyDatoCmsFluid
         }
       }
