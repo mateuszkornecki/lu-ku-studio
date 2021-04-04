@@ -12,6 +12,7 @@ type NavigationLayoutProps = {
 const NavigationLayout = (props: NavigationLayoutProps) => {
   const { children, path } = props
   const { isMobile } = useWidth()
+  const isLayoutPage = path === "/"
 
   const [isExpandedMobileMenu, setIsExpandedMobileMenu] = useState(false)
 
@@ -23,7 +24,7 @@ const NavigationLayout = (props: NavigationLayoutProps) => {
     setIsExpandedMobileMenu(false)
   }
 
-  if (isMobile) {
+  if (isMobile && isLayoutPage) {
     return (
       <div className="static grid md:grid-cols-2 h-screen">
         <div

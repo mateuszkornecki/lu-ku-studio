@@ -1,9 +1,9 @@
-import React, { ReactNode } from "react"
+import React, { ReactElement, ReactNode } from "react"
 
 import NavigationLayout from "./NavigationLayout"
 
 type LayoutProps = {
-  children: ReactNode
+  children: ReactElement
   path: string
 }
 
